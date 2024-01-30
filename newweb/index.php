@@ -1,8 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- Mirrored from priyansh42.github.io/IT-Company-Website/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jan 2024 12:39:28 GMT -->
-<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -344,18 +341,25 @@
 <section id="contact" class="contact">
     <h1 class="heading">get in touch</h1>
 </section>
+
+
 <div class="contact-in">
     <div class="contact-map">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d30711243.17762776!2d64.4398422293091!3d20.011408266548177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30635ff06b92b791%3A0xd78c4fa1854213a6!2sIndia!5e0!3m2!1sen!2sin!4v1644684739958!5m2!1sen!2sin" width="100%" height="auto" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     </div>
-    <div class="contact-form">
-        <form action="https://priyansh42.github.io/IT-Company-Website/contactme.php" method="POST">
-            <input type="text" name="name" placeholder="Name" class="contact-form-txt" required>
+    <div class="contact-form container">
+        
+    <span id="response"></span>
+            <input type="text" name="name" id="name" placeholder="Name" class="contact-form-txt" required>
             <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required placeholder="Contact number" maxlength="10" class="contact-form-phone">
-            <input type="email" name="email" placeholder="Email" class="contact-form-email" required>
-            <textarea placeholder="Your Message" name="message" class="contact-form-txtarea" required></textarea>
-            <input type="submit" value="Submit" name="submit" class="contact-form-btn">
-        </form>
+            <input type="email" name="email" id="email" placeholder="Email" class="contact-form-email" required>
+            <textarea placeholder="Your Message" id="message" name="message" class="contact-form-txtarea" required></textarea>
+           
+           
+            <input type="submit" value="Submit" name="send_data" id="send_data" class="contact-form-btn">
+        
+
+
     </div>
     </div>
 
@@ -488,7 +492,31 @@
   </div>
 
   <a href="#" class="back-to-top"><i class="ion-ios-arrow-up"></i></a>
-</body>
 
-<!-- Mirrored from priyansh42.github.io/IT-Company-Website/ by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 30 Jan 2024 12:39:42 GMT -->
+  <script type="text/javascript">
+	$(document).ready(function(){
+		$('#send_data').click(function(){
+		    $("#send_data").prop('disabled', true);
+		    $("#send_data").html('Loading ...');
+			$.post("contact_us.php",
+			{
+				name: $('#name').val(),
+				email: $('#email').val(),
+				phone: $('#phone').val(),
+				message: $('#message').val()
+			},
+
+				function(data){
+					$('#response').html(data);
+					$("#send_data").html('<i class="fa fa-location-arrow"></i> Send Message');
+					$('input[type="text"], input[type="email"], textarea').val('');
+					$("#send_data").prop('disabled', false);
+				}
+			);
+		});
+	});
+</script>
+<script src="https://ahaduvacancy.com/Includes/Script/jquery-3.5.1.slim.min.js"></script>
+<script src="https://ahaduvacancy.com/Includes/Script/jquery.min.js"></script>
+</body>
 </html>
